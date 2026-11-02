@@ -1,0 +1,17 @@
+[package]
+name = "aerofusion-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Batuhan Akkova"]
+description = "High-integrity, deterministic 6-DoF Error-State Extended Kalman Filter for aerospace and robotics"
+license = "MIT"
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]
+
+[[bench]]
+name = "filter_bench"
+harness = false

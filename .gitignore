@@ -1,0 +1,33 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# C++ & CMake
+/cpp_demo/build/
+*.obj
+*.exe
+*.dll
+*.pdb
+*.lib
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+# Visual outputs / temporary
+*.gif
+*.mp4
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp

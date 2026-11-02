@@ -1,0 +1,13 @@
+[package]
+name = "aerofusion-ffi"
+version = "0.1.0"
+edition = "2021"
+authors = ["Batuhan Akkova"]
+description = "C ABI and C++ interoperability layer for the Aerofusion flight sensor fusion engine"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+aerofusion-core = { path = "../aerofusion-core" }
