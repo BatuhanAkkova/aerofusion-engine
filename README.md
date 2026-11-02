@@ -6,7 +6,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 
-> **"I developed a memory-safe, ultra-low-latency embedded flight software."**
+> **A memory-safe, ultra-low-latency embedded flight software.**
 > 
 > A high-integrity, deterministic 6-DoF/9-DoF **Error-State Extended Kalman Filter (ES-EKF / MEKF)** designed for mission-critical aerospace autopilots, UAVs, and robotics. Built with a zero-heap **Rust** core, a modern **C++20** integration wrapper, and a live 3D telemetry **Ground Control Station** in Python.
 
