@@ -51,14 +51,46 @@ fn main() {
     let min = latencies_ns[0];
 
     println!("Iterations Sampled   : {}", ITERATIONS);
-    println!("predict() Avg Latency: {:8.2} ns ({:.3} µs)", avg_predict_ns, avg_predict_ns / 1000.0);
-    println!("9-DoF Full Step Avg  : {:8.2} ns ({:.3} µs)", avg_step_ns, avg_step_ns / 1000.0);
+    println!(
+        "predict() Avg Latency: {:8.2} ns ({:.3} µs)",
+        avg_predict_ns,
+        avg_predict_ns / 1000.0
+    );
+    println!(
+        "9-DoF Full Step Avg  : {:8.2} ns ({:.3} µs)",
+        avg_step_ns,
+        avg_step_ns / 1000.0
+    );
     println!("---------------- Latency Distribution (9-DoF) ----------------");
-    println!("Min Latency          : {:8.2} ns ({:.3} µs)", min, min / 1000.0);
-    println!("Median (p50)         : {:8.2} ns ({:.3} µs)", p50, p50 / 1000.0);
-    println!("95th Percentile (p95): {:8.2} ns ({:.3} µs)", p95, p95 / 1000.0);
-    println!("99th Percentile (p99): {:8.2} ns ({:.3} µs)", p99, p99 / 1000.0);
-    println!("Max Latency          : {:8.2} ns ({:.3} µs)", max, max / 1000.0);
-    println!("Max Throughput Rate  : {:.0} Hz ({:.2} kHz)", 1e9 / avg_step_ns, (1e9 / avg_step_ns) / 1000.0);
+    println!(
+        "Min Latency          : {:8.2} ns ({:.3} µs)",
+        min,
+        min / 1000.0
+    );
+    println!(
+        "Median (p50)         : {:8.2} ns ({:.3} µs)",
+        p50,
+        p50 / 1000.0
+    );
+    println!(
+        "95th Percentile (p95): {:8.2} ns ({:.3} µs)",
+        p95,
+        p95 / 1000.0
+    );
+    println!(
+        "99th Percentile (p99): {:8.2} ns ({:.3} µs)",
+        p99,
+        p99 / 1000.0
+    );
+    println!(
+        "Max Latency          : {:8.2} ns ({:.3} µs)",
+        max,
+        max / 1000.0
+    );
+    println!(
+        "Max Throughput Rate  : {:.0} Hz ({:.2} kHz)",
+        1e9 / avg_step_ns,
+        (1e9 / avg_step_ns) / 1000.0
+    );
     println!("===============================================================");
 }

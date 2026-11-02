@@ -283,7 +283,11 @@ impl EkfEngine {
         }
 
         let a_norm = accel.scale(1.0 / norm);
-        self.update_vector(a_norm, self.gravity_ref_nav, self.config.accel_noise / g_nom)
+        self.update_vector(
+            a_norm,
+            self.gravity_ref_nav,
+            self.config.accel_noise / g_nom,
+        )
     }
 
     /// Magnetometer measurement update to correct yaw heading drift.

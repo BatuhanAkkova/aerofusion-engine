@@ -2,6 +2,13 @@
 //!
 //! Exposes stable `extern "C"` functions for embedding into C, C++, and RTOS environments.
 
+#![allow(
+    clippy::needless_range_loop,
+    clippy::should_implement_trait,
+    clippy::too_many_arguments,
+    clippy::not_unsafe_ptr_arg_deref
+)]
+
 use aerofusion_core::{EkfConfig, EkfEngine, ImuMeasurement, MagMeasurement, Vec3};
 use std::ffi::c_char;
 use std::panic::catch_unwind;
@@ -82,7 +89,9 @@ pub extern "C" fn aerofusion_create() -> *mut AerofusionEngine {
 }
 
 #[no_mangle]
-pub extern "C" fn aerofusion_create_with_config(config: *const AerofusionConfigC) -> *mut AerofusionEngine {
+pub extern "C" fn aerofusion_create_with_config(
+    config: *const AerofusionConfigC,
+) -> *mut AerofusionEngine {
     if config.is_null() {
         return std::ptr::null_mut();
     }
@@ -99,10 +108,8 @@ pub extern "C" fn aerofusion_destroy(engine: *mut AerofusionEngine) {
     if engine.is_null() {
         return;
     }
-    let _ = catch_unwind(|| {
-        unsafe {
-            drop(Box::from_raw(engine));
-        }
+    let _ = catch_unwind(|| unsafe {
+        drop(Box::from_raw(engine));
     });
 }
 
@@ -156,7 +163,11 @@ pub extern "C" fn aerofusion_update_accel(
     }
     let res = catch_unwind(|| unsafe {
         let updated = (*engine).update_accel(Vec3::new(ax, ay, az));
-        if updated { 1 } else { 0 }
+        if updated {
+            1
+        } else {
+            0
+        }
     });
     res.unwrap_or(AEROFUSION_ERR_PANIC)
 }
@@ -175,7 +186,11 @@ pub extern "C" fn aerofusion_update_mag(
         let updated = (*engine).update_mag(MagMeasurement {
             mag: Vec3::new(mx, my, mz),
         });
-        if updated { 1 } else { 0 }
+        if updated {
+            1
+        } else {
+            0
+        }
     });
     res.unwrap_or(AEROFUSION_ERR_PANIC)
 }
@@ -331,11 +346,17 @@ mod ffi_tests {
     fn test_ffi_null_safety() {
         let null_engine: *mut AerofusionEngine = std::ptr::null_mut();
         assert_eq!(aerofusion_reset(null_engine), AEROFUSION_ERR_NULL_PTR);
-        assert_eq!(aerofusion_predict(null_engine, 0.0, 0.0, 0.0, 0.01), AEROFUSION_ERR_NULL_PTR);
-        
+        assert_eq!(
+            aerofusion_predict(null_engine, 0.0, 0.0, 0.0, 0.01),
+            AEROFUSION_ERR_NULL_PTR
+        );
+
         let mut tel = unsafe { std::mem::zeroed::<AerofusionTelemetryC>() };
-        assert_eq!(aerofusion_get_telemetry(null_engine, &mut tel), AEROFUSION_ERR_NULL_PTR);
-        
+        assert_eq!(
+            aerofusion_get_telemetry(null_engine, &mut tel),
+            AEROFUSION_ERR_NULL_PTR
+        );
+
         // Destroying null pointer must not crash
         aerofusion_destroy(null_engine);
     }

@@ -44,12 +44,12 @@ pub struct EkfConfig {
 impl Default for EkfConfig {
     fn default() -> Self {
         Self {
-            gyro_noise: 0.005,      // 0.3 deg/s
+            gyro_noise: 0.005,       // 0.3 deg/s
             gyro_bias_noise: 0.0001, // slow drift
-            accel_noise: 0.3,       // m/s^2
+            accel_noise: 0.3,        // m/s^2
             mag_noise: 0.2,
-            init_att_cov: 0.1,      // initial angle variance
-            init_bias_cov: 0.01,    // initial bias variance
+            init_att_cov: 0.1,   // initial angle variance
+            init_bias_cov: 0.01, // initial bias variance
             gravity_magnitude: 9.80665,
         }
     }

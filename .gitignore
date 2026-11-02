@@ -23,7 +23,6 @@ build/
 .pytest_cache/
 
 # Visual outputs / temporary
-*.gif
 *.mp4
 *.log
 

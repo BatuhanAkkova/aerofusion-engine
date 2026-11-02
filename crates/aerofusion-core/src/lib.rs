@@ -4,8 +4,12 @@
 //! for aerospace flight computers, UAV autopilots, and robotics.
 //!
 
-
 #![cfg_attr(not(feature = "std"), no_std)]
+#![allow(
+    clippy::needless_range_loop,
+    clippy::should_implement_trait,
+    clippy::too_many_arguments
+)]
 
 #[cfg(not(feature = "std"))]
 extern crate core as std;
@@ -35,9 +39,24 @@ mod tests {
         for (r, p, y) in angles {
             let q = Quat::from_euler(r, p, y);
             let recovered = q.to_euler();
-            assert!((recovered.roll - r).abs() < 1e-4, "Roll mismatch: expected {}, got {}", r, recovered.roll);
-            assert!((recovered.pitch - p).abs() < 1e-4, "Pitch mismatch: expected {}, got {}", p, recovered.pitch);
-            assert!((recovered.yaw - y).abs() < 1e-4, "Yaw mismatch: expected {}, got {}", y, recovered.yaw);
+            assert!(
+                (recovered.roll - r).abs() < 1e-4,
+                "Roll mismatch: expected {}, got {}",
+                r,
+                recovered.roll
+            );
+            assert!(
+                (recovered.pitch - p).abs() < 1e-4,
+                "Pitch mismatch: expected {}, got {}",
+                p,
+                recovered.pitch
+            );
+            assert!(
+                (recovered.yaw - y).abs() < 1e-4,
+                "Yaw mismatch: expected {}, got {}",
+                y,
+                recovered.yaw
+            );
         }
     }
 
@@ -72,7 +91,7 @@ mod tests {
         // Vehicle stationary at 10 deg pitch (0.1745 rad)
         let pitch_true = 0.1745f32;
         let q_true = Quat::from_euler(0.0, pitch_true, 0.0);
-        
+
         // Sensor at rest sees gravity opposing nav z=[0,0,1]
         let g_nav = Vec3::new(0.0, 0.0, 9.80665);
         let a_body = q_true.unrotate_vector(g_nav);
@@ -98,8 +117,16 @@ mod tests {
             pitch_true,
             out.euler.pitch
         );
-        assert!(out.euler.roll.abs() < 0.02, "Expected roll ~ 0, got {}", out.euler.roll);
-        assert!(out.euler.yaw.abs() < 0.02, "Expected yaw ~ 0, got {}", out.euler.yaw);
+        assert!(
+            out.euler.roll.abs() < 0.02,
+            "Expected roll ~ 0, got {}",
+            out.euler.roll
+        );
+        assert!(
+            out.euler.yaw.abs() < 0.02,
+            "Expected yaw ~ 0, got {}",
+            out.euler.yaw
+        );
     }
 
     #[test]
@@ -118,7 +145,9 @@ mod tests {
                 gyro: true_bias, // Noisy gyro output = 0 + true_bias
                 dt,
             };
-            let mag = MagMeasurement { mag: Vec3::new(1.0, 0.0, 0.0) };
+            let mag = MagMeasurement {
+                mag: Vec3::new(1.0, 0.0, 0.0),
+            };
             filter.step(imu, Some(mag));
         }
 

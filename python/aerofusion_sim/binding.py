@@ -3,6 +3,7 @@ ctypes FFI bindings to the aerofusion-ffi Rust cdylib.
 """
 
 import ctypes
+import ctypes.util
 from ctypes import c_float, c_uint64, c_int32, c_char_p, Structure, POINTER
 from pathlib import Path
 from dataclasses import dataclass
@@ -71,11 +72,19 @@ def _find_library() -> Path:
         base_dir / "target" / "debug" / "aerofusion_ffi.dll",
         base_dir / "cpp_demo" / "build" / "aerofusion_ffi.dll",
         base_dir / "target" / "release" / "libaerofusion_ffi.so",
+        base_dir / "target" / "debug" / "libaerofusion_ffi.so",
         base_dir / "target" / "release" / "libaerofusion_ffi.dylib",
+        base_dir / "target" / "debug" / "libaerofusion_ffi.dylib",
     ]
     for p in candidates:
         if p.exists():
             return p
+
+    # Fallback to system loader
+    sys_lib = ctypes.util.find_library("aerofusion_ffi")
+    if sys_lib:
+        return Path(sys_lib)
+
     raise FileNotFoundError(
         f"Could not locate aerofusion_ffi binary. Searched in: {[str(c) for c in candidates]}"
     )

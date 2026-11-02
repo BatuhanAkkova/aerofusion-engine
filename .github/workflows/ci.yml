@@ -86,4 +86,5 @@ jobs:
       - name: Run End-to-End Flight Accuracy Benchmark
         run: |
           export LD_LIBRARY_PATH=$PWD/target/release:$LD_LIBRARY_PATH
-          python -m python.aerofusion_sim.run_verification
+          export PYTHONPATH=$PWD/python:$PWD:$PYTHONPATH
+          python python/aerofusion_sim/run_verification.py

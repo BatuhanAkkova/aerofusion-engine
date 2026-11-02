@@ -4,10 +4,22 @@ Computes RMSE metrics comparing True vs Raw vs EKF-Fused attitude.
 """
 
 import sys
+from pathlib import Path
+
+_pkg_root = Path(__file__).resolve().parent.parent
+if str(_pkg_root) not in sys.path:
+    sys.path.insert(0, str(_pkg_root))
+
+try:
+    from .binding import AerofusionEngine
+    from .trajectory import TrajectoryGenerator
+    from .sensor_model import ImuSensorModel
+except (ImportError, ValueError):
+    from aerofusion_sim.binding import AerofusionEngine
+    from aerofusion_sim.trajectory import TrajectoryGenerator
+    from aerofusion_sim.sensor_model import ImuSensorModel
+
 import numpy as np
-from .binding import AerofusionEngine
-from .trajectory import TrajectoryGenerator
-from .sensor_model import ImuSensorModel
 
 
 def run_full_simulation(duration_sec: float = 25.0, rate_hz: float = 200.0):

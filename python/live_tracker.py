@@ -14,7 +14,9 @@ from aerofusion_sim.trajectory import TrajectoryGenerator
 from aerofusion_sim.sensor_model import ImuSensorModel
 
 
-def run_live_tracker(duration_sec=6.0, fps=20, output_path="aerofusion_flight_demo.gif"):
+def run_live_tracker(duration_sec=6.0, fps=20, output_path=None):
+    if output_path is None:
+        output_path = str(Path(__file__).resolve().parent.parent / "assets" / "aerofusion_flight_demo.gif")
     print(f"[INFO] Initializing Aerofusion EKF live tracker ({duration_sec}s @ {fps} FPS)...")
     rate_hz = 100.0
     dt = 1.0 / rate_hz

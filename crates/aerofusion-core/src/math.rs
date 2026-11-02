@@ -14,7 +14,11 @@ pub struct Vec3 {
 }
 
 impl Vec3 {
-    pub const ZERO: Self = Self { x: 0.0, y: 0.0, z: 0.0 };
+    pub const ZERO: Self = Self {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    };
 
     #[inline]
     pub const fn new(x: f32, y: f32, z: f32) -> Self {
@@ -300,18 +304,12 @@ impl Mat3 {
     };
 
     pub const IDENTITY: Self = Self {
-        data: [
-            [1.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0],
-            [0.0, 0.0, 1.0],
-        ],
+        data: [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
     };
 
     #[inline]
     pub const fn from_rows(r0: [f32; 3], r1: [f32; 3], r2: [f32; 3]) -> Self {
-        Self {
-            data: [r0, r1, r2],
-        }
+        Self { data: [r0, r1, r2] }
     }
 
     #[inline]

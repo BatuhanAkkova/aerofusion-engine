@@ -1,6 +1,6 @@
 # Aerofusion Engine
 
-[![Aerofusion CI](https://github.com/your-username/aerofusion-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/aerofusion-engine/actions)
+[![Aerofusion CI](https://github.com/BatuhanAkkova/aerofusion-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/aerofusion-engine/actions)
 [![Rust](https://img.shields.io/badge/rust-1.93%2B-orange.svg)](https://www.rust-lang.org)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-brightgreen.svg)](https://www.python.org/)
@@ -16,7 +16,7 @@
 
 Notice how the **raw gyroscope integration (red)** rapidly diverges due to bias drift and high-frequency noise, while the **Aerofusion Rust EKF estimate (cyan)** locks onto the **ground truth attitude (white dashed)**:
 
-![Aerofusion Flight Tracker](aerofusion_flight_demo.gif)
+![Aerofusion Flight Tracker](assets/aerofusion_flight_demo.gif)
 
 ---
 
@@ -177,7 +177,7 @@ python python/export_portfolio_plots.py
 
 ### 6. Generate Real Animated Flight GIF from Code
 ```bash
-# Re-runs the live filter and renders aerofusion_flight_demo.gif
+# Re-runs the live filter and renders assets/aerofusion_flight_demo.gif
 python python/live_tracker.py --save-gif
 ```
 
