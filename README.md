@@ -152,8 +152,13 @@ cargo build --release --workspace
 ### 2. Build & Run C++ Autopilot Harness
 ```bash
 cd cpp_demo
-cmake -B build -S . -DCMAKE_CXX_COMPILER=clang++
-cmake --build build
+cmake -B build -S .
+cmake --build build --config Release
+
+# Windows PowerShell (Visual Studio generator)
+.\build\Release\aerofusion_demo.exe
+
+# Linux/macOS or a single-config generator
 ./build/aerofusion_demo
 ```
 

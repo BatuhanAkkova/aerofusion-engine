@@ -136,14 +136,14 @@ def build_3d_drone_figure(quat, roll, pitch, yaw):
     fig.add_trace(go.Scatter3d(
         x=arm1_x, y=arm1_y, z=arm1_z,
         mode="lines",
-        line=dict(color="#00f2ff", width=8),
+        line=dict(color="#4b5563", width=8),
         name="Airframe X-Arm",
         showlegend=False,
     ))
     fig.add_trace(go.Scatter3d(
         x=arm2_x, y=arm2_y, z=arm2_z,
         mode="lines",
-        line=dict(color="#00f2ff", width=8),
+        line=dict(color="#4b5563", width=8),
         name="Airframe Y-Arm",
         showlegend=False,
     ))
@@ -152,7 +152,7 @@ def build_3d_drone_figure(quat, roll, pitch, yaw):
     fig.add_trace(go.Scatter3d(
         x=rotor_x, y=rotor_y, z=rotor_z,
         mode="lines",
-        line=dict(color="#00ff66", width=4),
+        line=dict(color="#6b7280", width=4),
         name="Rotors",
         showlegend=False,
     ))
@@ -161,7 +161,7 @@ def build_3d_drone_figure(quat, roll, pitch, yaw):
     fig.add_trace(go.Scatter3d(
         x=[rot_nodes[4][0]], y=[rot_nodes[4][1]], z=[rot_nodes[4][2]],
         mode="markers",
-        marker=dict(size=10, color="#ffffff"),
+        marker=dict(size=10, color="#1f2937"),
         name="Fuselage",
         showlegend=False,
     ))
@@ -170,7 +170,7 @@ def build_3d_drone_figure(quat, roll, pitch, yaw):
     fig.add_trace(go.Scatter3d(
         x=[0, x_axis[0]], y=[0, x_axis[1]], z=[0, x_axis[2]],
         mode="lines+text",
-        line=dict(color="#ff3366", width=6),
+        line=dict(color="#2563eb", width=6),
         text=["", "Forward (+X)"],
         textposition="top right",
         name="Forward (+X)",
@@ -178,16 +178,16 @@ def build_3d_drone_figure(quat, roll, pitch, yaw):
     ))
 
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         scene=dict(
-            xaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#0b0f19"),
-            yaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#0b0f19"),
-            zaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#0b0f19"),
+            xaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#ffffff"),
+            yaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#ffffff"),
+            zaxis=dict(range=[-1.6, 1.6], showgrid=True, zeroline=False, title="", backgroundcolor="#ffffff"),
             camera=dict(eye=dict(x=1.8, y=-1.8, z=1.2)),
             aspectmode="cube",
         ),
         margin=dict(l=0, r=0, t=20, b=0),
-        paper_bgcolor="#0b0f19",
+        paper_bgcolor="#ffffff",
     )
     return fig
 
@@ -197,9 +197,9 @@ app = Dash(__name__, title="Aerofusion Ground Station")
 
 app.layout = html.Div(
     style={
-        "backgroundColor": "#070a12",
-        "color": "#e0e6ed",
-        "fontFamily": "Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, sans-serif",
+        "backgroundColor": "#f5f7fa",
+        "color": "#1f2937",
+        "fontFamily": "Segoe UI, Arial, sans-serif",
         "padding": "20px",
         "minHeight": "100vh",
     },
@@ -210,7 +210,7 @@ app.layout = html.Div(
                 "display": "flex",
                 "justifyContent": "space-between",
                 "alignItems": "center",
-                "borderBottom": "1px solid #1a2234",
+                "borderBottom": "1px solid #d1d5db",
                 "paddingBottom": "12px",
                 "marginBottom": "20px",
             },
@@ -218,19 +218,19 @@ app.layout = html.Div(
                 html.Div([
                     html.H1(
                         "AEROFUSION GCS // SENSOR FUSION ENGINE",
-                        style={"margin": "0", "fontSize": "22px", "letterSpacing": "2px", "color": "#00f2ff"},
+                        style={"margin": "0", "fontSize": "22px", "color": "#1f2937"},
                     ),
                     html.P(
                         "Safety-Critical 6-DoF Error-State EKF (Rust Core + C++ ABI + Python Telemetry)",
-                        style={"margin": "4px 0 0 0", "fontSize": "13px", "color": "#8b9bb4"},
+                        style={"margin": "4px 0 0 0", "fontSize": "13px", "color": "#6b7280"},
                     ),
                 ]),
                 html.Div(
                     style={"display": "flex", "gap": "15px", "alignItems": "center"},
                     children=[
-                        html.Span("STATUS: NOMINAL", style={"color": "#00ff66", "fontWeight": "bold", "fontSize": "12px", "backgroundColor": "#00ff6622", "padding": "4px 10px", "borderRadius": "4px"}),
-                        html.Span("CORE: RUST no_std", style={"color": "#ffaa00", "fontWeight": "bold", "fontSize": "12px", "backgroundColor": "#ffaa0022", "padding": "4px 10px", "borderRadius": "4px"}),
-                        html.Span("STEP LATENCY: 0.81 µs", style={"color": "#00f2ff", "fontWeight": "bold", "fontSize": "12px", "backgroundColor": "#00f2ff22", "padding": "4px 10px", "borderRadius": "4px"}),
+                        html.Span("STATUS: NOMINAL", style={"color": "#15803d", "fontWeight": "bold", "fontSize": "12px", "backgroundColor": "#ecfdf3", "padding": "4px 8px"}),
+                        html.Span("CORE: RUST no_std", style={"color": "#374151", "fontWeight": "bold", "fontSize": "12px"}),
+                        html.Span("STEP LATENCY: 0.81 µs", style={"color": "#2563eb", "fontWeight": "bold", "fontSize": "12px"}),
                     ],
                 ),
             ],
@@ -246,43 +246,43 @@ app.layout = html.Div(
             },
             children=[
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "12px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "12px", "border": "1px solid #d1d5db"},
                     children=[
-                        html.Div("ROLL ANGLE", style={"fontSize": "11px", "color": "#8b9bb4"}),
-                        html.Div(id="hud-roll", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#ffffff"}),
-                        html.Div("True vs Fused ±0.17°", style={"fontSize": "11px", "color": "#00ff66"}),
+                        html.Div("ROLL ANGLE", style={"fontSize": "11px", "color": "#6b7280"}),
+                        html.Div(id="hud-roll", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#1f2937"}),
+                        html.Div("True vs Fused ±0.17°", style={"fontSize": "11px", "color": "#15803d"}),
                     ],
                 ),
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "12px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "12px", "border": "1px solid #d1d5db"},
                     children=[
-                        html.Div("PITCH ANGLE", style={"fontSize": "11px", "color": "#8b9bb4"}),
-                        html.Div(id="hud-pitch", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#ffffff"}),
-                        html.Div("True vs Fused ±0.18°", style={"fontSize": "00ff66", "color": "#00ff66"}),
+                        html.Div("PITCH ANGLE", style={"fontSize": "11px", "color": "#6b7280"}),
+                        html.Div(id="hud-pitch", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#1f2937"}),
+                        html.Div("True vs Fused ±0.18°", style={"fontSize": "11px", "color": "#15803d"}),
                     ],
                 ),
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "12px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "12px", "border": "1px solid #d1d5db"},
                     children=[
-                        html.Div("YAW / HEADING", style={"fontSize": "11px", "color": "#8b9bb4"}),
-                        html.Div(id="hud-yaw", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#ffffff"}),
-                        html.Div("Mag-Assisted Lock", style={"fontSize": "11px", "color": "#00f2ff"}),
+                        html.Div("YAW / HEADING", style={"fontSize": "11px", "color": "#6b7280"}),
+                        html.Div(id="hud-yaw", children="0.00°", style={"fontSize": "22px", "fontWeight": "bold", "color": "#1f2937"}),
+                        html.Div("Mag-Assisted Lock", style={"fontSize": "11px", "color": "#2563eb"}),
                     ],
                 ),
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "12px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "12px", "border": "1px solid #d1d5db"},
                     children=[
-                        html.Div("GYRO BIAS ESTIMATE (X)", style={"fontSize": "11px", "color": "#8b9bb4"}),
-                        html.Div(id="hud-bias", children="0.00°/s", style={"fontSize": "22px", "fontWeight": "bold", "color": "#ffaa00"}),
-                        html.Div("Online Kalman Tracking", style={"fontSize": "11px", "color": "#8b9bb4"}),
+                        html.Div("GYRO BIAS ESTIMATE (X)", style={"fontSize": "11px", "color": "#6b7280"}),
+                        html.Div(id="hud-bias", children="0.00°/s", style={"fontSize": "22px", "fontWeight": "bold", "color": "#b45309"}),
+                        html.Div("Online Kalman Tracking", style={"fontSize": "11px", "color": "#6b7280"}),
                     ],
                 ),
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "12px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "12px", "border": "1px solid #d1d5db"},
                     children=[
-                        html.Div("SIMULATION TIME", style={"fontSize": "11px", "color": "#8b9bb4"}),
-                        html.Div(id="hud-time", children="0.00 s", style={"fontSize": "22px", "fontWeight": "bold", "color": "#00f2ff"}),
-                        html.Div("Sample Rate: 100 Hz", style={"fontSize": "11px", "color": "#8b9bb4"}),
+                        html.Div("SIMULATION TIME", style={"fontSize": "11px", "color": "#6b7280"}),
+                        html.Div(id="hud-time", children="0.00 s", style={"fontSize": "22px", "fontWeight": "bold", "color": "#2563eb"}),
+                        html.Div("Sample Rate: 100 Hz", style={"fontSize": "11px", "color": "#6b7280"}),
                     ],
                 ),
             ],
@@ -294,11 +294,11 @@ app.layout = html.Div(
             children=[
                 # Left: 3D Attitude Model
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "15px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "15px", "border": "1px solid #d1d5db"},
                     children=[
                         html.Div(
                             "REAL-TIME 3D ATTITUDE (EKF ESTIMATED ORIENTATION)",
-                            style={"fontSize": "13px", "fontWeight": "bold", "letterSpacing": "1px", "color": "#8b9bb4", "marginBottom": "10px"},
+                            style={"fontSize": "13px", "fontWeight": "bold", "color": "#374151", "marginBottom": "10px"},
                         ),
                         dcc.Graph(
                             id="drone-3d-graph",
@@ -310,11 +310,11 @@ app.layout = html.Div(
 
                 # Right: Attitude Comparison Plots
                 html.Div(
-                    style={"backgroundColor": "#0f1626", "padding": "15px", "borderRadius": "8px", "border": "1px solid #1c2740"},
+                    style={"backgroundColor": "#ffffff", "padding": "15px", "border": "1px solid #d1d5db"},
                     children=[
                         html.Div(
                             "ATTITUDE RESIDUALS: TRUE vs RAW NOISY vs EKF FUSED",
-                            style={"fontSize": "13px", "fontWeight": "bold", "letterSpacing": "1px", "color": "#8b9bb4", "marginBottom": "10px"},
+                            style={"fontSize": "13px", "fontWeight": "bold", "color": "#374151", "marginBottom": "10px"},
                         ),
                         dcc.Graph(
                             id="attitude-strip-chart",
@@ -329,10 +329,9 @@ app.layout = html.Div(
         # Playback Controls & Slider
         html.Div(
             style={
-                "backgroundColor": "#0f1626",
+                "backgroundColor": "#ffffff",
                 "padding": "15px",
-                "borderRadius": "8px",
-                "border": "1px solid #1c2740",
+                "border": "1px solid #d1d5db",
                 "marginTop": "20px",
                 "display": "flex",
                 "alignItems": "center",
@@ -344,11 +343,10 @@ app.layout = html.Div(
                     children="PAUSE",
                     n_clicks=0,
                     style={
-                        "backgroundColor": "#00f2ff",
-                        "color": "#070a12",
-                        "border": "none",
+                        "backgroundColor": "#2563eb",
+                        "color": "#ffffff",
+                        "border": "1px solid #1d4ed8",
                         "padding": "8px 24px",
-                        "borderRadius": "4px",
                         "fontWeight": "bold",
                         "cursor": "pointer",
                     },
@@ -435,7 +433,7 @@ def update_telemetry_views(step_idx):
     strip_fig.add_trace(go.Scatter(
         x=t_window, y=GLOBAL_TELEMETRY["true_roll"][start_idx:end_idx],
         mode="lines",
-        line=dict(color="#ffffff", width=2, dash="dash"),
+        line=dict(color="#6b7280", width=2, dash="dash"),
         name="Ground Truth (Roll)",
     ))
 
@@ -443,7 +441,7 @@ def update_telemetry_views(step_idx):
     strip_fig.add_trace(go.Scatter(
         x=t_window, y=GLOBAL_TELEMETRY["raw_roll"][start_idx:end_idx],
         mode="lines",
-        line=dict(color="#ff3366", width=1),
+        line=dict(color="#d97706", width=1),
         name="Raw Gyro (Drifting)",
     ))
 
@@ -451,17 +449,17 @@ def update_telemetry_views(step_idx):
     strip_fig.add_trace(go.Scatter(
         x=t_window, y=GLOBAL_TELEMETRY["ekf_roll"][start_idx:end_idx],
         mode="lines",
-        line=dict(color="#00f2ff", width=2.5),
+        line=dict(color="#2563eb", width=2.5),
         name="Aerofusion EKF Fused",
     ))
 
     strip_fig.update_layout(
-        template="plotly_dark",
-        paper_bgcolor="#0b0f19",
-        plot_bgcolor="#0b0f19",
+        template="plotly_white",
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
         margin=dict(l=40, r=20, t=20, b=40),
-        xaxis=dict(title="Mission Time [s]", showgrid=True, gridcolor="#1a2234"),
-        yaxis=dict(title="Roll Attitude [deg]", showgrid=True, gridcolor="#1a2234"),
+        xaxis=dict(title="Mission Time [s]", showgrid=True, gridcolor="#e5e7eb"),
+        yaxis=dict(title="Roll Attitude [deg]", showgrid=True, gridcolor="#e5e7eb"),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
     )
 
